@@ -1,8 +1,13 @@
 <?php
 
 use App\Http\Controllers\pharmacy\pharmacyViewsController;
+use App\Http\Controllers\pharmacy\PharmacyController;
 use Illuminate\Support\Facades\Route;
 
+use Barryvdh\Debugbar\Facades\Debugbar;
+// TODO
+// disable Debug
+Debugbar::disable();
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +20,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
 
 Route::get('/veiw_pharmacies',[pharmacyViewsController::class,'viewPharmcies']);
+
+// pharmacies
+Route::get('/pharmacies', [PharmacyController::class, 'index']);
+Route::get('/pharmacies/{id}', [PharmacyController::class, 'show']);
+Route::post('/pharmacies', [PharmacyController::class, 'store']);
+Route::put('/pharmacies/{id}', [PharmacyController::class, 'update']);
+Route::delete('/pharmacies/{id}', [PharmacyController::class, 'destroy']);
